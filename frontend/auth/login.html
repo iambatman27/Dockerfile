@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INFO HUB - Login</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0a0e1f;
+  --panel: #101832;
+  --accent: #00cfff;
+  --accent2: #7b5cff;
+  --txt: #e0e6f1;
+  --muted: #8893a0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.auth-card {
+  background: var(--panel);
+  border-radius: 16px;
+  padding: 50px 70px;        /* more spacious padding */
+  width: 100%;
+  max-width: 450px;           /* wider card */
+  text-align: center;
+  border: 1px solid var(--accent);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.6);
+}
+
+.brand-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 36px;           /* bigger title */
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.auth-tagline {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 28px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;                 /* bigger gap between fields */
+  text-align: left;
+}
+
+.auth-form label {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* FULL WIDTH INPUTS */
+.auth-form input {
+  width: 100%;
+  display: block;
+  padding: 18px 20px;        /* taller inputs */
+  border-radius: 12px;
+  border: 1px solid var(--accent);
+  background: #0d1328;
+  color: var(--txt);
+  font-size: 16px;
+  outline: none;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 18px;
+  border-radius: 12px;
+  border: none;
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.auth-links {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.auth-links a {
+  color: var(--accent2);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .auth-card {
+    padding: 40px 30px;
+    max-width: 90%;
+  }
+  .brand-text {
+    font-size: 28px;
+  }
+  .auth-form input {
+    padding: 14px 16px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="auth-card">
+  <h1 class="brand-text">Login</h1>
+  <p class="auth-tagline">Access your AI tools account</p>
+
+  <form class="auth-form">
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Enter your email" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter your password" required>
+
+    <button type="submit" class="auth-btn">Login</button>
+  </form>
+
+  <div class="auth-links">
+      <p><a href="ForgotPassword.html">Forgot Password?</a></p>
+    <p>Don't have an account? <a href="SignUp.html">Sign Up</a></p>
+  </div>
+</div>
+
+</body>
+</html>
