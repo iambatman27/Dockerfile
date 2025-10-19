@@ -1,4 +1,12 @@
 {
+  "name": "ai-tools",
+  "version": "1.0.0",
+  "description": "AI Tools Backend",
+  "main": "script.js",
+  "scripts": {
+    "start": "node script.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
@@ -7,18 +15,11 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.1"
   },
-  "name": "ai-tools",
-  "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iambatman27/project1.git"
   },
-  "keywords": [],
+  "keywords": ["AI", "tools", "backend"],
   "author": "",
   "license": "ISC",
   "bugs": {

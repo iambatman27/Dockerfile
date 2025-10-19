@@ -2279,52 +2279,30 @@ function renderSubcategories(category) {
   }
 }
 
-// Update the initializeApp function to ensure subcategories are visible
-function initializeApp() {
-  // Render main categories on homepage
-  renderMainCategories();
-  
-  // Initialize compliment game
-  initializeComplimentGame();
-  
-  // Initialize search functionality
-  initializeSearch();
-  
-  // Handle URL parameters
-  handleUrlParams();
-  
-  // Check if we're on a category page and render accordingly
-  const currentPath = window.location.pathname;
-  if (currentPath.includes('categories/')) {
-    const category = currentPath.split('/').pop().replace('.html', '');
-    if (subcategories[category]) {
-      // Add category-page class to body for specific styling
-      document.body.classList.add('category-page');
-      renderSubcategories(category);
-      
-      // Force subcategories to be visible on mobile
-      const subcatsContainer = document.getElementById('subcategories');
-      if (subcatsContainer) {
-        subcatsContainer.style.display = 'block';
-        subcatsContainer.style.visibility = 'visible';
-        subcatsContainer.style.opacity = '1';
-      }
-    }
-  }
-}
-// ---------- Start the Application ----------
-document.addEventListener('DOMContentLoaded', initializeApp);
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
 
-// ---------- Export for use in other files ----------
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = {
-    tools,
-    subcategories,
-    compliments,
-    renderMainCategories,
-    renderSubcategories,
-    renderToolsList,
-    initializeComplimentGame,
-    performSearch
-  };
-}
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Test route
+app.get('/', (req, res) => {
+  res.send('Backend is working!');
+});
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
