@@ -1,213 +1,230 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>INFO HUB - Sign Up</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - INFO HUB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #000000;
+            --panel: #111111;
+            --muted: #b0b0b0;
+            --accent: #00aaff;
+            --card: #1a1a1a;
+            --txt: #ffffff;
+            --hover-glow: rgba(0,170,255,0.25);
+        }
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<style>
-:root {
-  --bg: #0a0e1f;
-  --panel: #101832;
-  --accent: #00cfff;
-  --accent2: #7b5cff;
-  --txt: #e0e6f1;
-  --muted: #8893a0;
-}
+        body {
+            font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: var(--bg);
+            color: var(--txt);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+        .auth-container {
+            width: 100%;
+            max-width: 400px;
+        }
 
-html, body {
-  height: 100%;
-  font-family: 'Inter', sans-serif;
-  background: var(--bg);
-  color: var(--txt);
-}
+        .auth-card {
+            background: var(--panel);
+            padding: 40px 32px;
+            border-radius: 20px;
+            border: 1px solid #1f1f1f;
+            text-align: center;
+        }
 
-.auth-container {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-}
+        .brand-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 0 0 8px rgba(0,170,255,0.4);
+            margin-bottom: 10px;
+        }
 
-/* Left description */
-.auth-left {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 60px;
-  text-align: left;
-  background: var(--bg);
-}
+        .auth-tagline {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 26px;
+        }
 
-.auth-left h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 64px;
-  color: var(--accent);
-  margin-bottom: 20px;
-}
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            text-align: left;
+        }
 
-.auth-left p {
-  font-size: 16px;
-  color: var(--muted);
-  line-height: 1.6;
-  max-width: 500px;
-  min-height: 80px; /* reserve space to avoid jump */
-}
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-/* Right signup card */
-.auth-right {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-}
+        .form-group label {
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 500;
+        }
 
-.auth-card {
-  background: var(--panel);
-  border-radius: 16px;
-  padding: 40px 30px;
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-  border: 1px solid var(--accent);
-}
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid #2a2a2a;
+            background: #0e0e0e;
+            color: var(--txt);
+            outline: none;
+            font-size: 15px;
+            transition: border 0.3s, box-shadow 0.3s, transform 0.3s;
+        }
 
-.brand-text {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 32px;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
+        .form-group input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 16px var(--hover-glow);
+            transform: scale(1.02);
+        }
 
-.auth-tagline {
-  color: var(--muted);
-  font-size: 14px;
-  margin-bottom: 24px;
-}
+        .auth-btn {
+            width: 100%;
+            padding: 14px 0;
+            border-radius: 14px;
+            border: none;
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            margin-top: 10px;
+        }
 
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  text-align: left;
-}
+        .auth-btn:hover {
+            background: #33ccff;
+            box-shadow: 0 0 20px var(--hover-glow);
+            transform: translateY(-2px);
+        }
 
-.auth-form label {
-  font-size: 13px;
-  color: var(--muted);
-}
+        .auth-links {
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--muted);
+            text-align: center;
+        }
 
-.auth-form input {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 10px;
-  border: 1px solid var(--accent);
-  background: #0d1328;
-  color: var(--txt);
-  font-size: 15px;
-  outline: none;
-}
+        .auth-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
 
-.auth-btn {
-  width: 100%;
-  padding: 14px;
-  border-radius: 12px;
-  border: none;
-  background: var(--accent);
-  color: #000;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-}
+        .auth-links a:hover {
+            color: #33ccff;
+            text-shadow: 0 0 8px var(--hover-glow);
+        }
 
-.auth-links {
-  margin-top: 18px;
-  font-size: 13px;
-  color: var(--muted);
-  text-align: center;
-}
+        .terms {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 15px;
+        }
 
-.auth-links a {
-  color: var(--accent2);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .auth-container {
-    flex-direction: column;
-  }
-  .auth-left, .auth-right {
-    flex: unset;
-    width: 100%;
-    text-align: center;
-    padding: 30px;
-  }
-  .auth-left h1 { font-size: 48px; }
-}
-</style>
+        .terms a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1 class="brand-text">INFO HUB</h1>
+            <p class="auth-tagline">Join the ultimate AI tools directory</p>
+            
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a password" required>
+                </div>
+                <script>
+document.querySelector('.auth-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const fullname = document.getElementById('fullname').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    
+    if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+    }
+    
+    try {
+        const response = await fetch('http://localhost:5000/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ fullname, email, password })
+        });
 
-<div class="auth-container">
-  <!-- Left Description -->
-  <div class="auth-left">
-    <div>
-      <h1>INFO HUB</h1>
-      <p id="typing-text"></p>
-    </div>
-  </div>
-
-  <!-- Right Signup Form -->
-  <div class="auth-right">
-    <div class="auth-card">
-      <h1 class="brand-text">Sign Up</h1>
-      <p class="auth-tagline">Create your account to access AI tools</p>
-
-      <form class="auth-form">
-        <label for="name">Name</label>
-        <input type="text" id="name" placeholder="Enter your name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email" required>
-
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password" required>
-
-        <button type="submit" class="auth-btn">Sign Up</button>
-      </form>
-
-      <div class="auth-links">
-         <p><a href="ForgotPassword.html">Forgot Password?</a></p>
-        <p>Already have an account? <a href="Login.html">Login</a></p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-const text = "INFO HUB is your ultimate AI tools directory. Discover, compare, and explore the latest AI technologies that will empower your business and personal projects.";
-const typingElement = document.getElementById('typing-text');
-let index = 0;
-
-function typeWriter() {
-  if (index < text.length) {
-    typingElement.innerHTML += text.charAt(index);
-    index++;
-    setTimeout(typeWriter, 20); // typing speed
-  }
-}
-
-// Start typing when page loads
-window.onload = typeWriter;
+        const data = await response.json();
+        
+        if (data.success) {
+            localStorage.setItem('infohub_token', data.token);
+            alert('Registration successful!');
+            window.location.href = '../index.html';
+        } else {
+            alert('Error: ' + data.message);
+        }
+    } catch (error) {
+        console.error('Registration error:', error);
+        alert('Network error. Please try again.');
+    }
+});
 </script>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+                </div>
+                
+                <button type="submit" class="auth-btn">Create Account</button>
+            </form>
 
+            <p class="terms">
+                By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+            </p>
+
+            <div class="auth-links">
+                Already have an account? <a href="login.html">Sign In</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

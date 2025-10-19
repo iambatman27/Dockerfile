@@ -1,47 +1,133 @@
-const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
-const generateToken = (id) => {
-  return jwt.sign({ id }, 'your_jwt_secret', { expiresIn: '30d' });
-};
+const JWT_SECRET = 'your-secret-key-here'; // Change this in production
 
-// Register
-exports.registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+// Register new user
+exports.register = async (req, res) => {
+    try {
+        const { fullname, email, password } = req.body;
 
-  try {
-    const userExists = await User.findOne({ email });
-    if (userExists) return res.status(400).json({ message: 'User already exists' });
+        // Check if user already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({
+                success: false,
+                message: 'User already exists with this email'
+            });
+        }
 
-    const user = await User.create({ name, email, password });
-    res.status(201).json({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-      token: generateToken(user._id)
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error' });
-  }
-};
+        // Create new user
+        const user = new User({
+            fullname,
+            email,
+            password
+        });
 
-// Login
-exports.loginUser = async (req, res) => {
-  const { email, password } = req.body;
+        await user.save();
 
-  try {
-    const user = await User.findOne({ email });
-    if (user && (await user.matchPassword(password))) {
-      res.json({
-        _id: user.id,
-        name: user.name,
-        email: user.email,
-        token: generateToken(user._id)
-      });
-    } else {
-      res.status(401).json({ message: 'Invalid credentials' });
+        // Generate JWT token
+        const token = jwt.sign(
+            { userId: user._id, email: user.email },
+            JWT_SECRET,
+            { expiresIn: '24h' }
+        );
+
+        res.status(201).json({
+            success: true,
+            message: 'User registered successfully',
+            token,
+            user: {
+                id: user._id,
+                fullname: user.fullname,
+                email: user.email
+            }
+        });
+
+    } catch (error) {
+        console.error('Registration error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error during registration'
+        });
     }
-  } catch (error) {
-    res.status(500).json({ message: 'Server error' });
-  }
+};
+
+// Login user
+exports.login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Find user by email
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid email or password'
+            });
+        }
+
+        // Check password
+        const isPasswordValid = await user.comparePassword(password);
+        if (!isPasswordValid) {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid email or password'
+            });
+        }
+
+        // Generate JWT token
+        const token = jwt.sign(
+            { userId: user._id, email: user.email },
+            JWT_SECRET,
+            { expiresIn: '24h' }
+        );
+
+        res.json({
+            success: true,
+            message: 'Login successful',
+            token,
+            user: {
+                id: user._id,
+                fullname: user.fullname,
+                email: user.email
+            }
+        });
+
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error during login'
+        });
+    }
+};
+
+// Forgot password
+exports.forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'No account found with this email'
+            });
+        }
+
+        // In a real app, you'd send an email with reset link
+        // For now, we'll just return success
+        res.json({
+            success: true,
+            message: 'Password reset instructions sent to your email'
+        });
+
+    } catch (error) {
+        console.error('Forgot password error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error'
+        });
+    }
 };

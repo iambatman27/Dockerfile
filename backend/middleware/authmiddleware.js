@@ -1,21 +1,26 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+const JWT_SECRET = 'your-secret-key-here';
 
-const protect = async (req, res, next) => {
-  let token;
+const authMiddleware = (req, res, next) => {
+    const token = req.header('Authorization')?.replace('Bearer ', '');
 
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-    try {
-      token = req.headers.authorization.split(' ')[1];
-      const decoded = jwt.verify(token, 'your_jwt_secret');
-      req.user = await User.findById(decoded.id).select('-password');
-      next();
-    } catch (error) {
-      res.status(401).json({ message: 'Not authorized, token failed' });
+    if (!token) {
+        return res.status(401).json({
+            success: false,
+            message: 'No token, authorization denied'
+        });
     }
-  }
 
-  if (!token) res.status(401).json({ message: 'Not authorized, no token' });
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (error) {
+        res.status(401).json({
+            success: false,
+            message: 'Token is not valid'
+        });
+    }
 };
 
-module.exports = { protect };
+module.exports = authMiddleware;

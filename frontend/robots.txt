@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /auth/*
+
+Sitemap: https://infohub.net.in/sitemap.xml

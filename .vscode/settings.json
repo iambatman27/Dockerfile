@@ -1,0 +1,8 @@
+{
+  "mdb.presetConnections": [
+    {
+      "name": "My MongoDB Atlas",
+      "connectionString": "mongodb+srv://iamniranjan:niranjandbatlas@aitools.2vkj5ey.mongodb.net/?retryWrites=true&w=majority&appName=aitools"
+    }
+  ]
+}
