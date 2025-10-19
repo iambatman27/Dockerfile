@@ -19,7 +19,11 @@
     "type": "git",
     "url": "git+https://github.com/iambatman27/project1.git"
   },
-  "keywords": ["AI", "tools", "backend"],
+  "keywords": [
+    "AI",
+    "tools",
+    "backend"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {

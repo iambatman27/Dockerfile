@@ -2279,30 +2279,35 @@ function renderSubcategories(category) {
   }
 }
 
+require('dotenv').config(); // only needed for local development
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config();
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
 app.use(express.json());
 
-// Test route
-app.get('/', (req, res) => {
-  res.send('Backend is working!');
+// Get JWT secret from environment variable
+const jwtSecret = process.env.JWT_SECRET;
+
+// Example route using JWT
+app.post('/login', (req, res) => {
+  const token = jwt.sign({ userId: 123 }, jwtSecret, { expiresIn: '1h' });
+  res.json({ token });
 });
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.log(err));
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Test route
+app.get('/', (req, res) => res.send('Backend is working!'));
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
