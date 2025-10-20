@@ -3,6 +3,7 @@
 
 // For production (Netlify frontend)
 const API_URL = 'https://infohub-backend-h11h.onrender.com/api';
+
 // Utility functions
 function showMessage(message, type = 'error') {
     alert(message);
@@ -41,7 +42,7 @@ function updateNavigation(isLoggedIn) {
         nav.innerHTML = `
             <a href="/">Home</a>
             <a href="/categories">Categories</a>
-            <span>Welcome, ${user.name}</span>
+            <span>Welcome, ${user.fullname}</span>
             <a href="#" onclick="logout()">Logout</a>
         `;
     } else {
@@ -89,18 +90,18 @@ async function loginUser(email, password) {
     }
 }
 
-// Signup function
+// Signup function - FIXED: changed 'name' to 'fullname'
 async function signupUser(name, email, password) {
     const signupBtn = document.querySelector('#signupForm button');
     setLoading(signupBtn, true);
     
     try {
-        const response = await fetch(`${API_URL}/auth/signup`, {
+        const response = await fetch(`${API_URL}/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, email, password })
+            body: JSON.stringify({ fullname: name, email, password }) // FIXED THIS LINE
         });
         
         const data = await response.json();
