@@ -11,7 +11,15 @@ app.use(cors({
     origin: ['https://infohub.net.in', 'http://localhost:3000'],
     credentials: true
 }));
+// Add this ABOVE your existing routes
+app.get('/', (req, res) => {
+    res.json({ message: 'InfoHub Backend is running!' });
+});
 
+// Your existing test route
+app.get('/api/test', (req, res) => {
+    res.json({ message: 'INFO HUB API is working!' });
+});
 // MongoDB Connection (Atlas)
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
@@ -23,10 +31,6 @@ mongoose.connect(process.env.MONGO_URL, {
 // Routes
 app.use('/api/auth', authRoutes);
 
-// Test route
-app.get('/api/test', (req, res) => {
-    res.json({ message: 'INFO HUB API is working!' });
-});
 
 // Port from Render or fallback to 5000
 const PORT = process.env.PORT || 5000;
