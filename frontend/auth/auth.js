@@ -2,7 +2,7 @@
 // const API_URL = 'http://localhost:5000/api';
 
 // For production (Netlify frontend)
-const API_URL = 'https://your-backend-domain.com/api';
+const API_URL = 'https://ai-tools-server.onrender.com/api';
 // Utility functions
 function showMessage(message, type = 'error') {
     alert(message);

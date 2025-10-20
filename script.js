@@ -1926,6 +1926,76 @@ const subcategories = {
   "Automation": ["Task Automation", "Workflow Automation", "Email Automation", "Marketing Automation", "Process Optimization", "Robotic Process Automation (RPA)", "Scripting AI", "AI Assistants", "Report Automation", "Data Pipeline Automation"]
 
 };
+// ---------- Auth Modal Class ----------
+class AuthModal {
+  constructor() {
+    this.modal = document.getElementById('authModal');
+    this.closeBtn = document.querySelector('.close-modal');
+    this.skipBtn = document.getElementById('skipForNow');
+    this.showAfter = 3000; // Show after 3 seconds
+    this.dismissDuration = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+    
+    this.init();
+  }
+  
+  init() {
+    // Check if user has dismissed the modal recently
+    const lastDismiss = localStorage.getItem('authModalDismissed');
+    const isLoggedIn = localStorage.getItem('infohub_token');
+    
+    if (isLoggedIn) return; // Don't show if user is logged in
+    
+    if (lastDismiss) {
+      const timeSinceDismiss = Date.now() - parseInt(lastDismiss);
+      if (timeSinceDismiss < this.dismissDuration) return;
+    }
+    
+    // Show modal after delay
+    setTimeout(() => {
+      this.show();
+    }, this.showAfter);
+    
+    // Event listeners
+    if (this.closeBtn) {
+      this.closeBtn.addEventListener('click', () => this.hide());
+    }
+    if (this.skipBtn) {
+      this.skipBtn.addEventListener('click', () => this.dismiss());
+    }
+    
+    // Close modal when clicking outside
+    if (this.modal) {
+      this.modal.addEventListener('click', (e) => {
+        if (e.target === this.modal) this.hide();
+      });
+    }
+    
+    // Close with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') this.hide();
+    });
+  }
+  
+  show() {
+    if (this.modal) {
+      this.modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  
+  hide() {
+    if (this.modal) {
+      this.modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  }
+  
+  dismiss() {
+    this.hide();
+    localStorage.setItem('authModalDismissed', Date.now().toString());
+  }
+}
+
 // ---------- Compliments Data ----------
 const compliments = [
   "You're such a beautiful soul!",
@@ -2034,7 +2104,7 @@ function renderSubcategories(category) {
   subcatsContainer.innerHTML = '';
   
   if (subcategories[category]) {
-    const title = document.createElement('h3');
+    const title = document.createElement('h2');
     title.textContent = `${category} Subcategories`;
     title.className = 'subcategories-title';
     subcatsContainer.appendChild(title);
@@ -2067,11 +2137,27 @@ function filterToolsBySubcategory(category, subcategory) {
     tool.category === category && tool.subcategory === subcategory
   );
   
-  // This would typically navigate to a category page or filter the current page
+  // Check if user is logged in for premium features
+  const isLoggedIn = localStorage.getItem('infohub_token');
+  
+  if (!isLoggedIn && filteredTools.length > 5) {
+    // Show auth modal if user tries to access many tools without signing up
+    showAuthModalForPremium();
+    return;
+  }
+  
   console.log(`Filtering ${category} - ${subcategory}:`, filteredTools.length, 'tools found');
   
   // For now, just show an alert. In your actual implementation, you'd render these tools
   alert(`Showing ${filteredTools.length} tools in ${category} > ${subcategory}`);
+}
+
+function showAuthModalForPremium() {
+  const modal = document.getElementById('authModal');
+  if (modal) {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
 }
 
 function renderToolsList(toolsList, containerId = 'tools-container') {
@@ -2088,14 +2174,25 @@ function renderToolsList(toolsList, containerId = 'tools-container') {
   toolsList.forEach(tool => {
     const toolCard = document.createElement('div');
     toolCard.className = 'tool-card';
+    
+    // Check if tool is premium (requires login)
+    const isPremium = tool.premium || false;
+    const isLoggedIn = localStorage.getItem('infohub_token');
+    
     toolCard.innerHTML = `
       <h3 class="tool-name">${escapeHtml(tool.name)}</h3>
       <p class="tool-description">${escapeHtml(tool.desc)}</p>
       <div class="tool-meta">
         <span class="tool-category">${escapeHtml(tool.subcategory)}</span>
         <span class="tool-price">${escapeHtml(tool.price)}</span>
+        ${isPremium ? '<span class="premium-badge">Premium</span>' : ''}
       </div>
-      <a href="${tool.url}" target="_blank" class="visit-btn">Visit Tool</a>
+      <a href="${isPremium && !isLoggedIn ? '#' : tool.url}" 
+         target="${isPremium && !isLoggedIn ? '_self' : '_blank'}" 
+         class="visit-btn ${isPremium && !isLoggedIn ? 'premium-locked' : ''}"
+         onclick="${isPremium && !isLoggedIn ? 'showAuthModalForPremium(); return false;' : ''}">
+        ${isPremium && !isLoggedIn ? '🔒 Sign Up to Access' : 'Visit Tool'}
+      </a>
     `;
     container.appendChild(toolCard);
   });
@@ -2171,7 +2268,14 @@ function performSearch(query) {
     tool.subcategory.toLowerCase().includes(query.toLowerCase())
   );
 
-  // Navigate to search results page or display results
+  // Check if user is logged in for premium search results
+  const isLoggedIn = localStorage.getItem('infohub_token');
+  
+  if (!isLoggedIn && searchResults.length > 10) {
+    showAuthModalForPremium();
+    return;
+  }
+
   console.log(`Search for "${query}":`, searchResults.length, 'results found');
   
   // For now, just show an alert. In your actual implementation, you'd render these results
@@ -2220,8 +2324,45 @@ function loadCategoryPage(category, subcategory = null) {
   renderToolsList(categoryTools);
 }
 
+// ---------- Auth Status Functions ----------
+function checkAuthStatus() {
+  const token = localStorage.getItem('infohub_token');
+  if (token) {
+    updateUIForLoggedInUser();
+    return true;
+  }
+  return false;
+}
+
+function updateUIForLoggedInUser() {
+  // Update UI elements for logged-in users
+  const userMenu = document.getElementById('userMenu');
+  const authButtons = document.getElementById('authButtons');
+  
+  if (userMenu) userMenu.style.display = 'block';
+  if (authButtons) authButtons.style.display = 'none';
+  
+  // Enable premium features
+  document.querySelectorAll('.premium-locked').forEach(el => {
+    el.classList.remove('premium-locked');
+    el.textContent = 'Visit Tool';
+  });
+}
+
+function logout() {
+  localStorage.removeItem('infohub_token');
+  localStorage.removeItem('user');
+  window.location.reload();
+}
+
 // ---------- Initialize Everything ----------
 function initializeApp() {
+  // Initialize auth modal
+  new AuthModal();
+  
+  // Check auth status
+  checkAuthStatus();
+  
   // Render main categories on homepage
   renderMainCategories();
   
@@ -2243,71 +2384,11 @@ function initializeApp() {
     }
   }
 }
-// Update the renderSubcategories function in your JavaScript
-function renderSubcategories(category) {
-  const subcatsContainer = document.getElementById('subcategories');
-  if (!subcatsContainer) return;
 
-  subcatsContainer.innerHTML = '';
-  
-  if (subcategories[category]) {
-    const title = document.createElement('h2');
-    title.textContent = `${category} Subcategories`;
-    title.className = 'subcategories-title';
-    subcatsContainer.appendChild(title);
+// Make functions globally available
+window.logout = logout;
+window.checkAuthStatus = checkAuthStatus;
+window.showAuthModalForPremium = showAuthModalForPremium;
 
-    const subcatsGrid = document.createElement('div');
-    subcatsGrid.className = 'subcategories-grid';
-    
-    subcategories[category].forEach(subcat => {
-      const subcatCard = document.createElement('a');
-      subcatCard.href = `#${subcat.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
-      subcatCard.className = 'subcategory-card';
-      subcatCard.innerHTML = `
-        <span class="subcategory-name">${escapeHtml(subcat)}</span>
-      `;
-      
-      subcatCard.addEventListener('click', (e) => {
-        e.preventDefault();
-        filterToolsBySubcategory(category, subcat);
-      });
-      
-      subcatsGrid.appendChild(subcatCard);
-    });
-    
-    subcatsContainer.appendChild(subcatsGrid);
-  }
-}
-
-require('dotenv').config(); // only needed for local development
-const express = require('express');
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Middleware
-app.use(express.json());
-
-// Get JWT secret from environment variable
-const jwtSecret = process.env.JWT_SECRET;
-
-// Example route using JWT
-app.post('/login', (req, res) => {
-  const token = jwt.sign({ userId: 123 }, jwtSecret, { expiresIn: '1h' });
-  res.json({ token });
-});
-
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.log(err));
-
-// Test route
-app.get('/', (req, res) => res.send('Backend is working!'));
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeApp);
