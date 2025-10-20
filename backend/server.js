@@ -35,3 +35,13 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
 });
+// Temporary test route
+app.post('/api/auth/test-signup', (req, res) => {
+    console.log('📦 Test route - Request body:', req.body);
+    console.log('📦 Headers:', req.headers);
+    res.json({ 
+        success: true, 
+        message: 'Test successful',
+        received: req.body 
+    });
+});
