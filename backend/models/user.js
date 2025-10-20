@@ -18,7 +18,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 6
-    }
+    },
+    favorites: [{
+        toolId: String,
+        toolName: String,
+        category: String,
+        addedAt: {
+            type: Date,
+            default: Date.now
+        }
+    }]
 }, {
     timestamps: true
 });
