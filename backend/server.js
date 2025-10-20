@@ -21,10 +21,8 @@ app.get('/api/test', (req, res) => {
     res.json({ message: 'INFO HUB API is working!' });
 });
 // MongoDB Connection (Atlas)
-mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO_URL)
+
 .then(() => console.log('✅ MongoDB Connected Successfully'))
 .catch(err => console.log('❌ MongoDB Connection Error:', err));
 
