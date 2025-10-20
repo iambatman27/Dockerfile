@@ -173,17 +173,49 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <h1 class="brand-text">INFO HUB</h1>
-        <p>⚡ Your Personal Dashboard</p>
-        <nav class="nav">
-            <a href="index.html">Home</a>
-            <a href="categories.html">Categories</a>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="#" onclick="logout()">Logout</a>
-        </nav>
-    </header>
+<header class="header">
+    <h1 class="brand-text">INFO HUB</h1>
+    <p>⚡ Your Personal Dashboard</p>
+    
+    <!-- Beautiful Navigation -->
+    <nav class="nav">
+        <a href="index.html">🏠 Home</a>
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="#" onclick="logout()">🚪 Logout</a>
+    </nav>
+</header>
+<style>
+    .nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+    }
 
+    .nav a {
+        color: #b0b0b0;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 10px 20px;
+        border-radius: 25px;
+        border: 1px solid #2a2a2a;
+        background: #0e0e0e;
+        transition: all 0.3s ease;
+        font-size: 14px;
+    }
+
+    .nav a:hover {
+        color: #00aaff;
+        border-color: #00aaff;
+        background: rgba(0, 170, 255, 0.1);
+        box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .nav a:active {
+        transform: translateY(0);
+    }
+</style>
     <div class="dashboard-container">
         <div class="welcome-section">
             <h1 class="welcome-title" id="welcomeTitle">Welcome Back, User!</h1>
