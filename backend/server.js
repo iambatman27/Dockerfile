@@ -7,8 +7,10 @@ const authRoutes = require('./routes/authroutes'); // Keep your existing routes
 const app = express();
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors({
+    origin: ['https://infohub.net.in', 'https://ai-tools-server.onrender.com'],
+    credentials: true
+}));app.use(express.json());
 
 // MongoDB Connection (Atlas)
 mongoose.connect(process.env.MONGO_URL, {
