@@ -8,9 +8,9 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: ['https://infohub.net.in', 'https://ai-tools-server.onrender.com'],
+    origin: ['https://infohub.net.in', 'http://localhost:3000'],
     credentials: true
-}));app.use(express.json());
+}));
 
 // MongoDB Connection (Atlas)
 mongoose.connect(process.env.MONGO_URL, {
