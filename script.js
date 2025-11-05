@@ -1998,11 +1998,11 @@ class AuthModal {
 
 // ---------- Compliments Data ----------
 const compliments = [
-  "You're such a beautiful soul!",
-  "Your smile made my day!",
-  "You look amazing today!",
-  "I love your laugh!",
-  "You're my sunshine!",
+  "You Deserve Better but not the Best!",
+  "My silence speaks louder than your excuses!",
+  "You deserve karma more than love!",
+  "I'm the lesson you never learned!",
+  "Cheating is a choice, loyalty is a responsibility!",
   "You make me so happy!",
   "Your eyes are stunning!",
   "You're perfect to me!",
