@@ -2,7 +2,7 @@
 // const API_URL = 'http://localhost:5000/api';
 
 // For production (Netlify frontend)
-const API_URL = 'https://infohub-backend-h11h.onrender.com/api';
+const API_URL = 'https://niranjan-kiar.onrender.com';
 
 // Utility functions
 function showMessage(message, type = 'error') {
