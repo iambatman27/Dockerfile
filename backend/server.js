@@ -60,7 +60,6 @@ app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
 });
 // Handle preflight requests
-app.options('/*', cors());
 const userRoutes = require('./routes/userRoutes');
 
 // Add this with your other app.use routes
