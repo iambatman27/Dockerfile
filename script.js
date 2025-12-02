@@ -1996,34 +1996,6 @@ class AuthModal {
   }
 }
 
-// ---------- Compliments Data ----------
-const compliments = [
-  "You Deserve Better but not the Best!",
-  "My silence speaks louder than your excuses!",
-  "You deserve karma more than love!",
-  "I'm the lesson you never learned!",
-  "Cheating is a choice, loyalty is a responsibility!",
-  "You make me so happy!",
-  "Your eyes are stunning!",
-  "You're perfect to me!",
-  "I adore you!",
-  "You make everything better!",
-  "Your energy is magical!",
-  "You're my favorite person!",
-  "You're incredible!",
-  "I love your style!",
-  "You brighten my life!",
-  "You're so thoughtful!",
-  "You have a kind heart!",
-  "You're my inspiration!",
-  "I can't stop smiling with you!",
-  "You're truly special!",
-  "You make life sweeter!",
-  "You're my everything!",
-  "I feel lucky with you!",
-  "You're my dream come true!",
-  "I love being with you!"
-];
 
 // ---------- UI Elements ----------
 let activeMainCat = 'All';
@@ -2040,9 +2012,6 @@ function escapeHtml(s) {
     .replaceAll("'", '&#039;');
 }
 
-function getRandomCompliment() {
-  return compliments[Math.floor(Math.random() * compliments.length)];
-}
 
 // ---------- Category Navigation Functions ----------
 function renderMainCategories() {
@@ -2196,51 +2165,6 @@ function renderToolsList(toolsList, containerId = 'tools-container') {
     `;
     container.appendChild(toolCard);
   });
-}
-
-// ---------- Compliment Game Functions ----------
-function initializeComplimentGame() {
-  const touchElement = document.getElementById('touchElement');
-  const complimentDisplay = document.getElementById('complimentDisplay');
-  const counter = document.getElementById('counter');
-
-  if (!touchElement || !complimentDisplay) return;
-
-  function displayCompliment() {
-    const compliment = getRandomCompliment();
-    complimentDisplay.textContent = compliment;
-    complimentDisplay.classList.remove('show', 'fade-in-up');
-    void complimentDisplay.offsetWidth;
-    complimentDisplay.classList.add('show', 'fade-in-up');
-
-    complimentCount++;
-    if (counter) {
-      counter.textContent = `Compliments received: ${complimentCount}`;
-    }
-
-    touchElement.style.transform = 'scale(0.95)';
-    setTimeout(() => { 
-      touchElement.style.transform = 'scale(1)'; 
-    }, 150);
-  }
-
-  // Event listeners for compliment game
-  touchElement.addEventListener('click', displayCompliment);
-  touchElement.addEventListener('touchstart', e => { 
-    e.preventDefault(); 
-    displayCompliment(); 
-  });
-  
-  touchElement.addEventListener('keydown', e => { 
-    if (e.key === 'Enter' || e.key === ' ') { 
-      e.preventDefault(); 
-      displayCompliment(); 
-    } 
-  });
-  
-  touchElement.setAttribute('tabindex', '0');
-  touchElement.setAttribute('role', 'button');
-  touchElement.setAttribute('aria-label', 'Get a beautiful compliment');
 }
 
 // ---------- Search Functionality ----------
