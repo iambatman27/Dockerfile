@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /auth/*
+Disallow: /auth/
+Disallow: /backend/
+Disallow: /node_modules/
 
-Sitemap: https://infohub.net.in/sitemap.xml
+Sitemap: https://www.infohub.net.in/sitemap.xml
