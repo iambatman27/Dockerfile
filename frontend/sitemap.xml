@@ -1,113 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Main Pages -->
   <url>
     <loc>https://www.infohub.net.in/</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
   <url>
     <loc>https://www.infohub.net.in/index.html</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  
-  <!-- Authentication Pages -->
-  <url>
-    <loc>https://www.infohub.net.in/login.html</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.infohub.net.in/signup.html</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.infohub.net.in/forgotpassword.html</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <!-- Dashboard -->
-  <url>
-    <loc>https://www.infohub.net.in/dashboard.html</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Static Pages -->
-  <url>
-    <loc>https://www.infohub.net.in/contact-us.html</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.infohub.net.in/about-us.html</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <!-- Categories Section -->
-  <url>
-    <loc>https://www.infohub.net.in/categories</loc>
-    <lastmod>2024-01-19</lastmod>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
   <url>
-    <loc>https://www.infohub.net.in/categories/news</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.infohub.net.in/categories/blogs</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.infohub.net.in/categories/tutorials</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.infohub.net.in/categories/reviews</loc>
-    <lastmod>2024-01-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Important Assets -->
-  <url>
-    <loc>https://www.infohub.net.in/style.css</loc>
-    <lastmod>2024-01-19</lastmod>
+    <loc>https://www.infohub.net.in/login.html</loc>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.7</priority>
   </url>
-  
   <url>
-    <loc>https://www.infohub.net.in/script.js</loc>
-    <lastmod>2024-01-19</lastmod>
+    <loc>https://www.infohub.net.in/signup.html</loc>
+    <lastmod>2024-01-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.infohub.net.in/dashboard.html</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.infohub.net.in/forgotpassword.html</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.infohub.net.in/categories</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
